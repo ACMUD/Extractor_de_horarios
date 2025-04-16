@@ -2,17 +2,12 @@ import pdfplumber
 from extract import extraerDatos
 import json
 
-LIMIT = 4
+LIMIT:int = 4
 
-import io
-
-def extraer_texto_y_tablas(pdf_input):
+def extraer_texto_y_tablas(pdf_input: bytes):
     resultado = []
 
-    if isinstance(pdf_input, (str, bytes, io.IOBase)):
-        pdf = pdfplumber.open(pdf_input)
-    else:
-        raise ValueError("El argumento debe ser una ruta de archivo o un stream de bytes.")
+    pdf = pdfplumber.open(pdf_input)
 
     with pdf as pdf:
         for i, pagina in enumerate(pdf.pages):
@@ -29,10 +24,12 @@ def extraer_texto_y_tablas(pdf_input):
 
     return resultado
 
+
+#Zona test
 if __name__ == '__main__':
-    with open("horario.pdf", "rb") as f:
-        resultado = extraer_texto_y_tablas(f)
+    with open("Horario 2025 - 1.pdf", "rb") as f:
+        resultado:dict = extraer_texto_y_tablas(f)
     pagina = resultado[0]
-    r = extraerDatos(pagina['texto'], pagina['tablas'][0])
+    r:dict = extraerDatos(pagina['texto'], pagina['tablas'][0])
 
     print(json.dumps(r, indent=4, ensure_ascii=False))

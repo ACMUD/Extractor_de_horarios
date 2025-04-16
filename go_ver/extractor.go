@@ -15,7 +15,7 @@ func extraerDatos(texto string, tabla [][]string) map[string]interface{} {
 	proyectPattern := regexp.MustCompile(`Proyecto Curricular:\s([0-9]+)`)
 	carreraPattern := regexp.MustCompile(`Plan de Estudios:\s([0-9]+) - ([A-Za-záéíóúÁÉÍÓÚñÑ ]+)`)
 	periodoPattern := regexp.MustCompile(`Horario de Clases Período ([0-9]+)-([0-9])`)
-	materiaPattern := regexp.MustCompile(`([A-zzáéíóúÁÉÍÓÚñÑ ]*)\sDocente:`)
+	materiaPattern := regexp.MustCompile(`([A-zzáéíóúÁÉÍÓÚñÑ ]*)\sDocente`)
 
 	// Extraer datos del texto
 	datos["nombre"] = namePattern.FindStringSubmatch(texto)[1]

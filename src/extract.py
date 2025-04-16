@@ -5,7 +5,7 @@ codePattern = re.compile(r"Código:\s([0-9][0-9]*)")
 proyectPattern = re.compile(r"Proyecto Curricular:\s([0-9]*)")
 carrera = re.compile(r"Plan de Estudios:\s([0-9]*) - ([A-záéíóúÁÉÍÓÚñÑ ]*)")
 periodo = re.compile(r"Horario de Clases Período ([0-9]*)-([0-9])")
-materia = re.compile(r"([A-zzáéíóúÁÉÍÓÚñÑ ]*)\sDocente:")
+materia = re.compile(r"([A-zzáéíóúÁÉÍÓÚñÑ ]*)\sDocente")
 
 
 
@@ -42,6 +42,7 @@ def extraerDatos(data : str, tabla = []):
     for fila in tabla:
         if 'Cod.' in fila[0]:
             continue
+        print(fila)
         _, name, _, _, _, lun, mar, mie, jue, vie, sab, dom = fila
         m_name = materia.search(name.replace('\n',' ')).group(1).strip()
         datos['materias'][m_name] = {i:j.split('\n')[0] for i, j in zip(['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'], [lun, mar, mie, jue, vie, sab, dom]) if j!=''}
