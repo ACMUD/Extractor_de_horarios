@@ -48,6 +48,6 @@ def extraerDatos(data : str, tabla = []):
         datos['materias'][m_name] = {i:j.split('\n')[0] for i, j in zip(['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'], [lun, mar, mie, jue, vie, sab, dom]) if j!=''}
         for i in datos['materias'][m_name]:
             ocupado[i].append(datos['materias'][m_name][i])
-    datos['Ocupado'] = unir_horarios(ocupado)
+    datos['ocupado'] = unir_horarios(ocupado)
      
     return datos
